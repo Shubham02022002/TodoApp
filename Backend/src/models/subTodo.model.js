@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const todoSchema = new Schema({
+const subTodoSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true,
@@ -11,6 +11,7 @@ const todoSchema = new Schema({
     },
     priority: {
         type: String,
+        default: 'low',
         enum: ['low', 'medium', 'high']
     },
     createdBy: {
@@ -18,4 +19,5 @@ const todoSchema = new Schema({
         ref: "User"
     }
 }, { timestamps: true });
-export const Todo = mongoose.model('Todo', todoSchema);
+
+export const SubTodo = mongoose.model("SubTodo", subTodoSchema);

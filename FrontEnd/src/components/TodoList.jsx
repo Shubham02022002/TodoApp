@@ -1,15 +1,22 @@
 import React, { useState } from 'react'
 import axios from "axios";
+import { useEffect } from 'react';
 
 const TodoList = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState('low');
 
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        axios.get("/api/todos")
+            .then((resp) => setTodos(resp.data));
+    }, []);
+
     const handleSubmit = () => {
         console.table([title, description, priority]);
-
-        axios.post('http://localhost:3000/addTodo', {
+        axios.post('/api/addTodo', {
             title,
             description,
             priority
